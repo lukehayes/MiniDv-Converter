@@ -21,9 +21,9 @@ from pathlib import Path
 import glob
 
 # ----------------------------------------------
-# Variables
+# Variables - Change these values if needed
 # ----------------------------------------------
-minidv_extention = ".*"
+minidv_extention = ".mp4"
 mp4_extention    = ".mp4"
 output_folder    = "Converted_Videos"
 
@@ -31,15 +31,15 @@ output_folder    = "Converted_Videos"
 # it is the quality of the x264 or x265 codec. Higher numbers mean
 # more compression but that could lead to worse video quality.
 # Play around with the number and see what results you get.
-quality = "-crf 28"
+quality = "-crf 128"
 
 # The codec to use during conversion. Defaults to x265 but can be
 # be changed to x264 for example.
-codec = "x265"
+codec = "x264"
 
-input_video = "video.dv"
-output_video = "video.mp4"
-conversion_command = f"ffmpeg -i {input_video} {codec} {quality} -o {output_video}"
+# input_video = "video.dv"
+# output_video = "video.mp4"
+# conversion_command = f"ffmpeg -i {input_video} {codec} {quality} -o {output_video}"
 
 # ----------------------------------------------
 # Video Conversion Part
@@ -57,16 +57,30 @@ for file in glob.glob(f"*{minidv_extention}"):
 
     # The name of the output file. Its the same as input_video except
     # that we change the extention from ".dv" to ".mp4"
-    output_video = Path(file).stem + mp4_extention
+    output_video = "converted-" + Path(file).stem + mp4_extention
 
     # The command that will convert the videos. We store it in a string here for use later.
-    conversion_command = f"ffmpeg -i {input_video} -vcodec {codec} {quality} -o {output_video}"
+    conversion_command = f"ffmpeg -i {input_video} -vcodec lib{codec} {quality} {output_video}"
 
+    print(f"Found file: {file}")
+    print(f"Converting file: {file} using: {conversion_command}")
+
+    # Run FFMpeg to convert the videos.
+    os.system(conversion_command)
+
+    # Once the conversion has finished, we want to move the new video to a fresh folder.
+    # If that folder doesn't exist, the lines below create the folder. The name of 
+    # the folder can be changed using the output_folder variable in the variables
+    # section of this script. Write the name of the folder you want INSIDE
+    # the quotes!
+    #
     if not os.path.exists(f"{output_folder}"):
         print(f"Creating {output_folder}")
         os.makedirs(f"{output_folder}")
 
-    print(file)
-    print(conversion_command)
+    # Here we move the newly converted video to the output folder that has
+    # been defined in the 'variable' section near the top of this file.
+    os.system(f"mv {output_video} {output_folder}")
+
 
 
