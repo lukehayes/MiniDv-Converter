@@ -37,9 +37,8 @@ quality = "-crf 128"
 # be changed to x264 for example.
 codec = "x264"
 
-# input_video = "video.dv"
-# output_video = "video.mp4"
-# conversion_command = f"ffmpeg -i {input_video} {codec} {quality} -o {output_video}"
+# Number of videos converted. Don't touch it.
+video_count = 0
 
 # ----------------------------------------------
 # Video Conversion Part
@@ -83,4 +82,7 @@ for file in glob.glob(f"*{minidv_extention}"):
     os.system(f"mv {output_video} {output_folder}")
 
 
+print("---")
+print(f"{video_count} videos converted and moved to {output_folder}.")
+print("---")
 
