@@ -80,6 +80,7 @@ for file in glob.glob(f"*{minidv_extention}"):
     # Here we move the newly converted video to the output folder that has
     # been defined in the 'variable' section near the top of this file.
     os.system(f"mv {output_video} {output_folder}")
+    video_count += 1
 
 
 print("---")
