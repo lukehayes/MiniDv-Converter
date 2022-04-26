@@ -31,7 +31,7 @@ output_folder    = "Converted_Videos"
 # it is the quality of the x264 or x265 codec. Higher numbers mean
 # more compression but that could lead to worse video quality.
 # Play around with the number and see what results you get.
-quality = "-crf 128"
+quality = "-crf 28"
 
 # The codec to use during conversion. Defaults to x265 but can be
 # be changed to x264 for example.
