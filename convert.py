@@ -23,7 +23,7 @@ import glob
 # ----------------------------------------------
 # Variables - Change these values if needed
 # ----------------------------------------------
-minidv_extention = ".mp4"
+minidv_extention = ".dv"
 mp4_extention    = ".mp4"
 output_folder    = "Converted_Videos"
 
